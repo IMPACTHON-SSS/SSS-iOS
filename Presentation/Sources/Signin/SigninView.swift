@@ -39,6 +39,7 @@ public struct SigninView: View {
                 .frame(height: 50)
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
+                .background(.background)
             }
         }
     }
