@@ -1,4 +1,5 @@
 import SwiftUI
+import SDS
 
 public struct SplashView: View {
     @EnvironmentObject var appState: AppState
@@ -9,9 +10,14 @@ public struct SplashView: View {
     }
 
     public var body: some View {
-        Text("Splash")
-            .onAppear {
-                appState.sceneFlow = .home
-            }
+        ZStack {
+            Color.main.frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            Image.logo
+        }
+        .ignoresSafeArea()
+        .onAppear {
+            appState.sceneFlow = .signin
+        }
     }
 }
