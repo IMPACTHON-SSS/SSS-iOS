@@ -7,8 +7,7 @@ let project = Project.dynamicFramework(
     deploymentTarget: .iOS(targetVersion: "15.9", devices: .iphone),
     dependencies: [
         .SPM.Swinject,
-        .SPM.Sora,
-        .SPM.FlowKit
+        .SPM.Sora
     ],
     scripts: [.swiftLint]
 )
