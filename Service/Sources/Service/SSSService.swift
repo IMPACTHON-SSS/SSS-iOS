@@ -1,5 +1,6 @@
 import Foundation
 import Sora
+import Alamofire
 
 public struct SSSService: Service {
     public var endpoint: URL {
@@ -8,6 +9,7 @@ public struct SSSService: Service {
         ) ?? URL(string: "https://www.google.com")!
     }
     public let path: [String]
+    public var interceptor: RequestInterceptor = Interceptor()
 
     public init(path: [String]) {
         self.path = path

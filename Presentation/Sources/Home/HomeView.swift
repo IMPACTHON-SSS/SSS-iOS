@@ -8,6 +8,7 @@ public struct HomeView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
+    @MainActor
     public var body: some View {
         HomeNavigationTitle(isShowingMenu: $viewModel.isShowingMenu) {
             VStack(alignment: .leading, spacing: 24) {
@@ -22,8 +23,7 @@ public struct HomeView: View {
                         .padding(.top, 10)
 
                     DateGridView(
-                        dateGrids: [
-                        ],
+                        dateGrids: viewModel.dishList.map { .asyncImage($0.date.day, .init(string: $0.url)) },
                         yearAndMonth: viewModel.date
                     ) { day in
                         print(day)
@@ -38,11 +38,23 @@ public struct HomeView: View {
                 Spacer()
 
                 LargeButton("일기 만들기") {
-                    // 카메라 띄우기
+                    DispatchQueue.main.async {
+                        viewModel.isPresented = true
+                    }
                 }
                 .padding(.vertical, 12)
             }
             .padding(.horizontal, 24)
         }
+        .onAppear(perform: viewModel.onAppear)
+        .sheet(isPresented: $viewModel.isPresented) {
+            CameraView($viewModel.image)
+        }
+    }
+}
+
+extension String {
+    var day: Int {
+        Int(self.components(separatedBy: "-").last!)!
     }
 }
