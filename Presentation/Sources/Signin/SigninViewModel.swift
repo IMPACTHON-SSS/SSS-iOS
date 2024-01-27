@@ -12,7 +12,7 @@ public final class SigninViewModel: ObservableObject {
     ) {
         Task {
             do {
-                let response = try await PostLoginRequest(body: .init(token: token))
+                let response = try await SigninRequest(body: .init(token: token))
                     .request(decodeWith: SigninResponseDTO.self, printResponse: true)
                 if response.isFirstLogin {
                     signupCompletion()
