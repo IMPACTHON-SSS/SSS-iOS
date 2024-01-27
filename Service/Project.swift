@@ -6,7 +6,7 @@ let project = Project.dynamicFramework(
     platform: .iOS,
     infoPlist: .extendingDefault(
         with: [
-            "BASE_URL": ""
+            "BASE_URL": "https://rollingapi.stubee.kr/"
         ]
     ),
     deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),

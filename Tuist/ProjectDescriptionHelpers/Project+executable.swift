@@ -7,6 +7,7 @@ public extension Project {
         product: Product = .app,
         deploymentTarget: DeploymentTarget = .iOS(targetVersion: "15.0", devices: [.iphone]),
         dependencies: [TargetDependency],
+        entitlements: Entitlements? = nil,
         settings: Settings? = nil
     ) -> Project {
         Project(
@@ -22,6 +23,7 @@ public extension Project {
                     infoPlist: .file(path: Path("Support/Info.plist")),
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
+                    entitlements: entitlements,
                     scripts: [.swiftLint],
                     dependencies: [
                         .project(target: "ThirdPartyLib", path: "../ThirdPartyLib")
