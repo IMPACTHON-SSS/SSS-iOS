@@ -1,3 +1,10 @@
+//
+//  Camera.swift
+//  Camera
+//
+//  Created by Mercen on 1/28/24.
+//
+
 import WidgetKit
 import SwiftUI
 
@@ -6,12 +13,12 @@ struct Provider: TimelineProvider {
         SimpleEntry(date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date())
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         var entries: [SimpleEntry] = []
 
         let currentDate = Date()
@@ -30,7 +37,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
-struct CameraEntryView : View {
+struct CameraEntryView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -78,4 +85,3 @@ struct Camera: Widget {
 } timeline: {
     SimpleEntry(date: .now)
 }
-

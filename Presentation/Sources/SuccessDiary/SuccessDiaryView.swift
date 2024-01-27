@@ -29,7 +29,6 @@ public struct SuccessDiaryView: View {
                 LargeButton("공유 하기") {
                     
                 }
-                .padding(.vertical, 24)
             }
         }
     }

@@ -22,7 +22,6 @@ struct SuccessSignupView: View {
                 appState.sceneFlow = .home
             }
             .padding(.vertical, 12)
-            .padding(.horizontal, 16)
         }
         .navigationBarBackButtonHidden()
     }

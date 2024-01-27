@@ -15,6 +15,7 @@ public struct HomeView: View {
                 Text("‘프라이데이'님!\n3일 연속으로 까먹지 않으셨네요!")
                     .font(.system(size: 24, weight: .bold))
                     .padding(.vertical, 24)
+                    .padding(.horizontal, 24)
 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("2024년 1월")
@@ -34,6 +35,7 @@ public struct HomeView: View {
                 .padding(.bottom, 2)
                 .background(Color.gray1)
                 .cornerRadius(13)
+                .padding(.horizontal, 24)
 
                 Spacer()
 
@@ -44,17 +46,21 @@ public struct HomeView: View {
                 }
                 .padding(.vertical, 12)
             }
-            .padding(.horizontal, 24)
         }
         .onOpenURL { url in
             if url == URL(string: "widget://camera")! {
-                
+                viewModel.isPresented = true
             }
         }
         .onAppear(perform: viewModel.onAppear)
         .sheet(isPresented: $viewModel.isPresented) {
             CameraView($viewModel.image)
+                .background(Color.black.ignoresSafeArea())
+                .onDisappear {
+                    viewModel.isNavigateToDiary = true
+                }
         }
+        .navigate(to: DiaryView(image: viewModel.image ?? .init()), when: $viewModel.isNavigateToDiary)
     }
 }
 

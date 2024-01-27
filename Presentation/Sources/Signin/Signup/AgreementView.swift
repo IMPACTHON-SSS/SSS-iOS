@@ -67,7 +67,6 @@ struct AgreementView: View {
                 }
                 .disabled(!(isChecked1&&isChecked2))
                 .padding(.vertical, 12)
-                .padding(.horizontal, 16)
             }
             .navigate(to: SuccessSignupView().environmentObject(appState), when: $isNavigateToSuccess)
             .navigationBarBackButtonHidden()

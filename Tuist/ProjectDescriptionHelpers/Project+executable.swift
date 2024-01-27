@@ -29,6 +29,17 @@ public extension Project {
                         .project(target: "ThirdPartyLib", path: "../ThirdPartyLib")
                     ] + dependencies,
                     settings: settings
+                ),
+                .init(
+                    name: "\(name)Widget",
+                    platform: .iOS,
+                    product: .appExtension,
+                    bundleId: "\(publicOrganizationName).\(name).WidgetExtension",
+                    deploymentTarget: deploymentTarget,
+                    infoPlist: .file(path: "AppExtension/Support/Widget-Info.plist"),
+                    sources: ["AppExtension/Sources/**"],
+                    resources: ["AppExtension/Resources/**"],
+                     scripts: [.swiftLint]
                 )
             ]
         )

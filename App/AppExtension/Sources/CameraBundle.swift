@@ -2,7 +2,8 @@
 //  CameraBundle.swift
 //  Camera
 //
-//  Created by Mercen on 1/28/24.
+//  Created by 홍승재 on 1/28/24.
+//  Copyright © 2024 com.sssimpacton. All rights reserved.
 //
 
 import WidgetKit
@@ -14,4 +15,3 @@ struct CameraBundle: WidgetBundle {
         Camera()
     }
 }
-

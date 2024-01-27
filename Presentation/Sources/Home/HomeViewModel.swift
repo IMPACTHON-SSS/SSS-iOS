@@ -5,8 +5,9 @@ import Sora
 
 public final class HomeViewModel: ObservableObject {
     @Published var isPresented: Bool = false
-    @Published var image: Image?
-    @Published var isShowingMenu: Bool = true
+    @Published var image: UIImage?
+    @Published var isShowingMenu: Bool = false
+    @Published var isNavigateToDiary: Bool = false
     @Published var dishList: [DishEntity] = []
     @Published var date: Date = .init()
 
