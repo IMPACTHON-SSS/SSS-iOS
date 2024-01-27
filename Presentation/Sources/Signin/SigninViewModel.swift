@@ -1,7 +1,17 @@
 import Foundation
+import Service
+import Sora
 
-final class SigninViewModel: ObservableObject {
+public final class SigninViewModel: ObservableObject {
+
     func signin(token: String) {
-        print("token:", token)
+        Task {
+            do {
+                let response = try await PostLoginRequest(body: .init(token: token))
+                    .request(decodeWith: SigninResponseDTO.self, printResponse: true)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }

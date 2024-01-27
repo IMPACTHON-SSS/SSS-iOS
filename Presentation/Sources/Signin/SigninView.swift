@@ -29,9 +29,6 @@ public struct SigninView: View {
                             print("Apple Login Successful")
                             guard let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential,
                                   let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8) else { return }
-                            print("===========Apple Email!!!!===========")
-                            print(appleIDCredential.email ?? "밝힐 수 없음")
-                            print("===========Apple Email!!!!===========")
                             viewModel.signin(token: identityToken)
                         case .failure(let error):
                             print(error.localizedDescription)

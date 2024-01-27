@@ -7,7 +7,8 @@ let project = Project.dynamicFramework(
     deploymentTarget: .iOS(targetVersion: "15.0", devices: [.iphone]),
     resources: ["Resources/**"], dependencies: [
         .SPM.SDS,
-        .SPM.FlowKit
+        .SPM.FlowKit,
+        .project(target: "Service", path: Path("../Service"))
     ],
     scripts: [.swiftLint]
 )

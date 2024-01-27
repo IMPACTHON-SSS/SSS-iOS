@@ -9,7 +9,7 @@ let dependencies = Dependencies(
             ),
             .remote(
                 url: "https://github.com/Mercen-Lee/Sora.git",
-                requirement: .branch("main")
+                requirement: .upToNextMajor(from: "1.0.0")
             ),
             .remote(
                 url: "https://github.com/Mercen-Lee/FlowKit.git",
