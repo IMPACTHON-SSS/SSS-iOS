@@ -44,5 +44,10 @@ public struct HomeView: View {
             }
             .padding(.horizontal, 24)
         }
+        .onOpenURL { url in
+            if url == URL(string: "widget://camera")! {
+                
+            }
+        }
     }
 }
