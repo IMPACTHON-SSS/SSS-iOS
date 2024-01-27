@@ -1,7 +1,7 @@
 import Foundation
 import Sora
 
-public struct AuthService: Service {
+public struct SSSService: Service {
     public var endpoint: URL {
         .init(
             string: Bundle.module.object(forInfoDictionaryKey: "BASE_URL") as? String ?? ""
