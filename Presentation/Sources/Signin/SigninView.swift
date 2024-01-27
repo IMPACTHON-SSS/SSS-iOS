@@ -19,27 +19,31 @@ public struct SigninView: View {
 
                 Spacer()
 
-                SignInWithAppleButton(.continue,
-                    onRequest: { request in
-                        request.requestedScopes = [.fullName, .email]
-                    },
-                    onCompletion: { result in
-                        switch result {
-                        case .success(let authResults):
-                            print("Apple Login Successful")
-                            guard let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential,
-                                  let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8) else { return }
-                            viewModel.signin(token: identityToken)
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                            print("error")
+                SignInWithAppleButton(.continue) { request in
+                    request.requestedScopes = [.fullName, .email]
+                } onCompletion: { result in
+                    switch result {
+                    case .success(let authResults):
+                        print("Apple Login Successful")
+                        guard let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential,
+                              let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
+                        else { return }
+
+                        viewModel.signin(token: identityToken) {
+                            appState.sceneFlow = .home
+                        } signupCompletion: {
+                            viewModel.isNavigateToAgreement = true
                         }
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        print("error")
                     }
-                )
+                }
                 .frame(height: 50)
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
             }
         }
+        .navigate(to: AgreementView().environmentObject(appState), when: $viewModel.isNavigateToAgreement)
     }
 }
