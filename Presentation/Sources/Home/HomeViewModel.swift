@@ -1,4 +1,5 @@
 import Foundation
 
-final class HomeViewModel: ObservableObject {
+public final class HomeViewModel: ObservableObject {
+    @Published var isShowing: Bool = false
 }

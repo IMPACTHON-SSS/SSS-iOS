@@ -1,13 +1,21 @@
 import SwiftUI
 
-struct HomeView: View {
+public struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
 
-    init(viewModel: HomeViewModel) {
+    public init(viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
-    var body: some View {
-         Text("HomeView")
+    public var body: some View {
+        VStack {
+            Text("HomeView")
+
+            Spacer()
+        }
+        .sideMenu(isShowing: $viewModel.isShowing) {
+            Color.black.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
+        }
     }
 }

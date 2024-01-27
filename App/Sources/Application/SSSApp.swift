@@ -5,18 +5,22 @@ import Service
 
 @main
 struct SSSApp: App {
-//    private let signinView: SigninView
+    @StateObject var appState = AppState(sceneFlow: .splash)
+    private let rootView: RootView
 
     init() {
         _ = Assembler([
             PresentationDI()
         ], container: DI.container)
 
-//        signinView = DI.container.resolve(SigninView.self)!
+        rootView = DI.container.resolve(RootView.self)!
     }
     var body: some Scene {
         WindowGroup {
-            Text("")
+            NavigationView {
+                rootView
+                    .environmentObject(appState)
+            }
         }
     }
 }

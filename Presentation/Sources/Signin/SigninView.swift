@@ -2,10 +2,11 @@ import SwiftUI
 import AuthenticationServices
 import SDS
 
-struct SigninView: View {
+public struct SigninView: View {
+    @EnvironmentObject var appState: AppState
     @StateObject var viewModel: SigninViewModel
 
-    init(viewModel: SigninViewModel) {
+    public init(viewModel: SigninViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
