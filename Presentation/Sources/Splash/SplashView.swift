@@ -11,7 +11,7 @@ public struct SplashView: View {
     public var body: some View {
         Text("Splash")
             .onAppear {
-                appState.sceneFlow = .signin
+                appState.sceneFlow = .home
             }
     }
 }

@@ -25,7 +25,7 @@ public struct SideMenu<MenuContent: View>: ViewModifier {
 
     public func body(content: Content) -> some View {
         return GeometryReader { proxy in
-            let menuWidth = proxy.size.width * 2 / 3
+            let menuWidth = proxy.size.width - 67
 
             ZStack(alignment: .trailing) {
                 content

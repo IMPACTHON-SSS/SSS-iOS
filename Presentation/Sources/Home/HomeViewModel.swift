@@ -1,5 +1,7 @@
 import Foundation
+import UIKit
 
 public final class HomeViewModel: ObservableObject {
-    @Published var isShowing: Bool = false
+    @Published var isShowingMenu: Bool = true
+    @Published var date: Date = .init()
 }

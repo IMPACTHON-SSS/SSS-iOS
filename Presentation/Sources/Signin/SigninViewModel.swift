@@ -14,6 +14,7 @@ public final class SigninViewModel: ObservableObject {
             do {
                 let response = try await SigninRequest(body: .init(token: token))
                     .request(decodeWith: SigninResponseDTO.self, printResponse: true)
+                TokenManager.saveToken(token: response.accessToken)
                 if response.isFirstLogin {
                     signupCompletion()
                 } else {
