@@ -7,7 +7,7 @@ public extension Project {
         product: Product = .app,
         deploymentTarget: DeploymentTarget = .iOS(targetVersion: "15.0", devices: [.iphone]),
         dependencies: [TargetDependency],
-        entitlements: Entitlements? = nil,
+        entitlements: Path? = nil,
         settings: Settings? = nil
     ) -> Project {
         Project(
