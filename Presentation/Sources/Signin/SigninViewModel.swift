@@ -7,7 +7,7 @@ public final class SigninViewModel: ObservableObject {
     func signin(token: String) {
         Task {
             do {
-                let response = try await PostLoginRequest(body: .init(token: token))
+                let response = try await SigninRequest(body: .init(token: token))
                     .request(decodeWith: SigninResponseDTO.self, printResponse: true)
                 TokenManager.saveToken(token: response.accessToken)
             } catch {

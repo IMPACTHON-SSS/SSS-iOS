@@ -1,7 +1,7 @@
 import Foundation
 import Sora
 
-public struct PostLoginRequest: Requestable, Body {
+public struct SigninRequest: Requestable, Body {
     public let route = SSSService.path("auth", "login", "apple")
     public let method: RequestMethod = .post
 
