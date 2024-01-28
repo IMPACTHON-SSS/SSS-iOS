@@ -1,7 +1,12 @@
 import SwiftUI
 import SDS
 
+class ImageModel: ObservableObject {
+    @Published var image: UIImage?
+}
+
 public struct HomeView: View {
+    @StateObject var image: ImageModel = .init()
     @StateObject var viewModel: HomeViewModel
 
     private var diaryView: DiaryView
@@ -57,14 +62,15 @@ public struct HomeView: View {
         }
         .onAppear(perform: viewModel.onAppear)
         .sheet(isPresented: $viewModel.isPresented) {
-            CameraView($viewModel.image)
+            CameraView($image.image)
                 .background(Color.black.ignoresSafeArea())
-                .onDisappear {
-                    viewModel.isNavigateToDiary = true
-                    diaryView.image = viewModel.image
-                }
         }
-        .navigate(to: diaryView, when: $viewModel.isNavigateToDiary)
+        .onChange(of: image.image) { newValue in
+            guard let newValue else { return }
+            viewModel.isNavigateToDiary = true
+            
+        }
+        .navigate(to: diaryView.environmentObject(image), when: $viewModel.isNavigateToDiary)
     }
 }
 

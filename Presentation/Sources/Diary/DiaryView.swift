@@ -2,9 +2,9 @@ import SwiftUI
 import SDS
 
 public struct DiaryView: View {
+    @EnvironmentObject var image: ImageModel
     @State private var isNavigateShareView = false
     @State private var text: String = ""
-    @State var image: UIImage?
 
     private let successDiaryView: SuccessDiaryView
 
@@ -17,14 +17,18 @@ public struct DiaryView: View {
     public var body: some View {
         NavigationBar {
             VStack(spacing: 24) {
-                Image(uiImage: image ?? .init())
+                Image(uiImage: image.image ?? .init())
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity, maxHeight: 168)
                     .cornerRadius(12)
                     .padding(.top, 24)
                     .padding(.horizontal, 24)
 
-                ZStack {
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $text)
+                        .font(.system(size: 14, weight: .medium))
+                        .gridColumnAlignment(.leading)
+
                     if text.isEmpty {
                         HStack(spacing: 1) {
                             Color.main
@@ -35,10 +39,6 @@ public struct DiaryView: View {
                                 .foregroundStyle(Color.gray4)
                         }
                     }
-
-                    TextEditor(text: $text)
-                        .font(.system(size: 14, weight: .medium))
-                        .gridColumnAlignment(.leading)
                 }
                 .padding(.horizontal, 24)
 

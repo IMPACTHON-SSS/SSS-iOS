@@ -17,7 +17,11 @@ public struct SplashView: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            appState.sceneFlow = .signin
+            viewModel.onAppear {
+                appState.sceneFlow = .home
+            } onError: {
+                appState.sceneFlow = .signin
+            }
         }
     }
 }

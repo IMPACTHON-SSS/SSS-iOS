@@ -41,6 +41,8 @@ public struct SuccessDiaryView: View {
                         .background(Color.black)
                         .cornerRadius(12)
                 }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 8)
             }
             .navigationBarBackButtonHidden()
         }

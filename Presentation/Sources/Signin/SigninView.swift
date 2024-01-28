@@ -24,17 +24,8 @@ public struct SigninView: View {
                     request.requestedScopes = [.fullName, .email]
                 } onCompletion: { result in
                     switch result {
-                    case .success(let authResults):
-                        print("Apple Login Successful")
-                        guard let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential,
-                              let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
-                        else { return }
-                        print(identityToken)
-                        viewModel.signin(token: identityToken) {
-                            appState.sceneFlow = .home
-                        } signupCompletion: {
-                            viewModel.isNavigateToAgreement = true
-                        }
+                    case .success(let _):
+                        viewModel.isNavigateToAgreement = true
                     case .failure(let error):
                         print(error.localizedDescription)
                         print("error")
@@ -47,8 +38,5 @@ public struct SigninView: View {
             }
         }
         .navigate(to: AgreementView().environmentObject(appState), when: $viewModel.isNavigateToAgreement)
-        .onAppear {
-            TokenManager.removeToken()
-        }
     }
 }
