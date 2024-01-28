@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 public final class AppState: ObservableObject {
     public init(sceneFlow: SceneFlow) {
         self.sceneFlow = sceneFlow
