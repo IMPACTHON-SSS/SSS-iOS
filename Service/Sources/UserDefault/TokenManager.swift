@@ -17,4 +17,8 @@ public struct TokenManager {
             return accessToken
         } else { return "" }
     }
+
+    public static func removeToken() {
+        userDefaults.removeObject(forKey: UserDefaultsKey.accessToken)
+    }
 }

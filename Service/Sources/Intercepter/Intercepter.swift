@@ -10,7 +10,9 @@ struct Interceptor: RequestInterceptor {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.timeoutInterval = 30
         let accessToken = TokenManager.getToken()
-        urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        if !accessToken.isEmpty {
+            urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
         completion(.success(urlRequest))
     }
 }

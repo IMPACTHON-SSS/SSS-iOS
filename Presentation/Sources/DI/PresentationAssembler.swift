@@ -30,10 +30,19 @@ public final class PresentationDI: Assembly {
 
         // Home
         container.register(HomeView.self) { resolver in
-            HomeView(viewModel: resolver.resolve(HomeViewModel.self)!)
+            HomeView(viewModel: resolver.resolve(HomeViewModel.self)!, diaryView: resolver.resolve(DiaryView.self)!)
         }
         container.register(HomeViewModel.self) { _ in
             HomeViewModel()
+        }
+        container.register(DiaryView.self) { resolver in
+            DiaryView(successDiaryView: resolver.resolve(SuccessDiaryView.self)!)
+        }
+        container.register(SuccessDiaryView.self) { resolver in
+            SuccessDiaryView(viewModel: resolver.resolve(SuccessDiaryViewModel.self)!)
+        }
+        container.register(SuccessDiaryViewModel.self) { _ in
+            SuccessDiaryViewModel()
         }
     }
 }

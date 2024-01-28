@@ -2,23 +2,29 @@ import SwiftUI
 import SDS
 
 public struct DiaryView: View {
+    @State private var isNavigateShareView = false
     @State private var text: String = ""
-    private let image: UIImage
+    @State var image: UIImage?
 
-    public init(image: UIImage) {
-        self.image = image
+    private let successDiaryView: SuccessDiaryView
+
+    public init(
+        successDiaryView: SuccessDiaryView
+    ) {
+        self.successDiaryView = successDiaryView
     }
 
     public var body: some View {
         NavigationBar {
             VStack(spacing: 24) {
-                Rectangle()
+                Image(uiImage: image ?? .init())
+                    .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity, maxHeight: 168)
                     .cornerRadius(12)
                     .padding(.top, 24)
                     .padding(.horizontal, 24)
 
-                Group {
+                ZStack {
                     if text.isEmpty {
                         HStack(spacing: 1) {
                             Color.main
@@ -28,21 +34,22 @@ public struct DiaryView: View {
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundStyle(Color.gray4)
                         }
-                    } else {
-                        TextEditor(text: $text)
-                            .font(.system(size: 14, weight: .medium))
-                            .gridColumnAlignment(.leading)
                     }
+
+                    TextEditor(text: $text)
+                        .font(.system(size: 14, weight: .medium))
+                        .gridColumnAlignment(.leading)
                 }
                 .padding(.horizontal, 24)
 
                 Spacer()
 
                 LargeButton("일기 만들기") {
-                    // 일기만들기
+                    isNavigateShareView.toggle()
                 }
             }
             .navigationBarBackButtonHidden()
+            .navigate(to: successDiaryView, when: $isNavigateShareView)
         }
     }
 }

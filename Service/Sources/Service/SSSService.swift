@@ -9,10 +9,11 @@ public struct SSSService: Service {
         ) ?? URL(string: "https://www.google.com")!
     }
     public let path: [String]
-    public var interceptor: RequestInterceptor = Interceptor()
+    public let interceptor: RequestInterceptor
 
     public init(path: [String]) {
         self.path = path
+        self.interceptor = Interceptor()
     }
 }
 

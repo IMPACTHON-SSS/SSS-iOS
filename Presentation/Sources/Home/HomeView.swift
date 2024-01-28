@@ -4,8 +4,11 @@ import SDS
 public struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
 
-    public init(viewModel: HomeViewModel) {
+    private var diaryView: DiaryView
+
+    public init(viewModel: HomeViewModel, diaryView: DiaryView) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.diaryView = diaryView
     }
 
     @MainActor
@@ -58,9 +61,10 @@ public struct HomeView: View {
                 .background(Color.black.ignoresSafeArea())
                 .onDisappear {
                     viewModel.isNavigateToDiary = true
+                    diaryView.image = viewModel.image
                 }
         }
-        .navigate(to: DiaryView(image: viewModel.image ?? .init()), when: $viewModel.isNavigateToDiary)
+        .navigate(to: diaryView, when: $viewModel.isNavigateToDiary)
     }
 }
 

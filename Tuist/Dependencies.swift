@@ -17,7 +17,7 @@ let dependencies = Dependencies(
             ),
             .remote(
                 url: "https://github.com/impacton-SSS/SSS-DesignSystem.git",
-                requirement: .upToNextMajor(from: "1.0.7")
+                requirement: .upToNextMajor(from: "1.0.10")
             )
         ]
     ),

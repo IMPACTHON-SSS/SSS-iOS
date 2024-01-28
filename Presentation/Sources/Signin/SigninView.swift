@@ -1,6 +1,7 @@
 import SwiftUI
 import AuthenticationServices
 import SDS
+import Service
 
 public struct SigninView: View {
     @EnvironmentObject var appState: AppState
@@ -28,7 +29,7 @@ public struct SigninView: View {
                         guard let appleIDCredential = authResults.credential as? ASAuthorizationAppleIDCredential,
                               let identityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
                         else { return }
-
+                        print(identityToken)
                         viewModel.signin(token: identityToken) {
                             appState.sceneFlow = .home
                         } signupCompletion: {
@@ -46,5 +47,8 @@ public struct SigninView: View {
             }
         }
         .navigate(to: AgreementView().environmentObject(appState), when: $viewModel.isNavigateToAgreement)
+        .onAppear {
+            TokenManager.removeToken()
+        }
     }
 }
