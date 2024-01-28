@@ -11,9 +11,12 @@ public final class HomeViewModel: ObservableObject {
     @Published var dishList: [DishEntity] = []
     @Published var date: Date = .init()
 
+    @MainActor 
     func onAppear() {
         fetchDish()
     }
+
+    @MainActor
     private func fetchDish() {
         Task {
             do {

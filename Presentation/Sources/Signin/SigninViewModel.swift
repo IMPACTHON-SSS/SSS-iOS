@@ -4,7 +4,7 @@ import Sora
 
 public final class SigninViewModel: ObservableObject {
     @Published var isNavigateToAgreement: Bool = false
-
+    @MainActor
     func signin(
         token: String,
         signinCompletion: @escaping  () -> Void,
